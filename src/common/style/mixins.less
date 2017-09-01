@@ -1,0 +1,47 @@
+.border-1px(@color){
+position :relative;
+border: none;
+&:after{
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background: @color;
+  width: 100%;
+  height: 1px;
+    }
+    /* 1.5倍屏 */
+    @media only screen and (-webkit-min-device-pixel-ratio: 1.5) {
+      .border-1px::after {
+          -webkit-transform: scaleY(0.7);
+          transform: scaleY(0.7);
+      }
+    }
+    /* 2倍屏 */
+    @media only screen and (-webkit-min-device-pixel-ratio: 2.0) {
+      .border-1px::after {
+          -webkit-transform: scaleY(0.5);
+          transform: scaleY(0.5);
+      }
+    }
+    /* 3倍屏 */
+    @media only screen and (-webkit-min-device-pixel-ratio: 3.0) {
+      .border-1px::after {
+          -webkit-transform: scaleY(0.33);
+          transform: scaleY(0.33);
+      }
+    }
+}
+.bg-image(@components,@name){
+    background-image: url('../../components/@{components}/images/@{name}@2x.png');
+      @media (min-device-pixel-ratio:3),(-webkit-min-device-pixel-ratio:3){
+    background-image: url('../../components/@{components}/images/@{name}@3x.png');
+    }
+}
+
+.bg-star(@components,@name){
+    background-image: url( '../../components/@{components}/images/@{name}@2x.png');
+    @media (min-device-pixel-ratio:3),(-webkit-min-device-pixel-ratio:3){
+      background-image: url( '../../components/@{components}/images/@{name}@3x.png');
+    }
+}
