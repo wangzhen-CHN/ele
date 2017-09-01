@@ -1,4 +1,4 @@
-# vue-dome01
+# vue2.0构建饿了么H5客户端
 
 > A Vue.js project
 
