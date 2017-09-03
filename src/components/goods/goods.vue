@@ -1,6 +1,6 @@
 <template>
 <div class="goods">
-    <div class="menu-wrapper">
+    <div class="menu-wrapper" ref="menu-wrapper">
         <ul>
            <li class="menu-item" v-for="(good, index) in goods" :key="index" @click="clickMenuItem(index, $event)">
             <span class="text border-1px">
@@ -9,7 +9,7 @@
           </li>
         </ul>
     </div>
-    <div class="foots-wrapper"></div>
+    <div class="foots-wrapper" ref="foots-wrapper"></div>
  </div>
 </template>
 
@@ -17,12 +17,12 @@
 import axios from 'axios';
 import Bscroll from 'better-scroll';
  export default {
-     data(){
+    data(){
          return {
              goods:[]
          }
-     },
-     props: {
+    },
+    props: {
         seller: Object
     },
     created() {
@@ -30,13 +30,22 @@ import Bscroll from 'better-scroll';
         axios.get('/api/goods')
             .then(response => {
                 this.goods = response.data.data;
-                console.log(response.data.data);
+                this.$nextTick(() => {
+                    this.initScorll();
+                    
+                })
             })
             .catch(error => {
                 console.log(error);
                 alert('网络错误，不能访问');
             })
+    },
+    methods:{
+        initScorll(){
+            this.menuScorll=new Bscroll('.menu-wrapper');
+        }
     }
+    
  }
 </script>
 
