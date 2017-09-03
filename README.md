@@ -7,10 +7,10 @@
 - 使用axios进行http请求获取数据
 - mockjs模拟数据
 - 使用less编写样式
-- 使用[better-scroll](https://github.com/ustbhuangyi/better-scroll)进行联动滑动
+- 使用better-scroll进行联动滑动
 
 ## 在线预览
-[DOME预览](http://www.mo36.com/ele)
+<h2>[Dome预览](http://www.mo36.com/ele)</h2>
 ## Build Setup
 
 ``` bash
