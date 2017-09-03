@@ -102,6 +102,7 @@
   .content-wrapper {
     position: relative;
     padding: 24px 12px 18px 24px;
+    display: flex;
     .avatar {
       vertical-align: top;
       display: inline-block;
@@ -116,6 +117,7 @@
       display: inline-block;
       margin-left: 16px;
       padding: 2px 0 2px;
+      flex: 1;
       .title {
         .brand {
           display: inline-block;
