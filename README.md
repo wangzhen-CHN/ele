@@ -1,7 +1,7 @@
 # vue2.0构建饿了么
 
 ## 主要依赖
-- 基于vue@2.0
+- 基于vue2.0
 - 使用vue-router进行页面路由切换
 - 使用axios进行http请求获取数据
 - 自动化构建工具webpack
