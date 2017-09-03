@@ -1,7 +1,16 @@
-# vue2.0构建饿了么H5客户端
+# vue2.0构建饿了么
 
-> A Vue.js project
+## 主要依赖
+- 基于vue@2.0
+- 使用vue-cli搭建项目框架
+- 使用vue-router进行页面路由切换
+- 使用axios进行http请求获取数据
+- mockjs模拟数据
+- 使用less编写样式
+- 使用[better-scroll](https://github.com/ustbhuangyi/better-scroll)进行联动滑动
 
+## 在线预览
+[DOME预览](http://www.mo36.com/ele)
 ## Build Setup
 
 ``` bash
@@ -14,8 +23,3 @@ npm run dev
 # build for production with minification
 npm run build
 
-# build for production and view the bundle analyzer report
-npm run build --report
-```
-
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
