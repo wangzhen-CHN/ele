@@ -3,7 +3,7 @@
     <v-header :seller="seller"></v-header>
     <div class="tab">
       <router-link class="tab-item" to="/goods"> <span>商品</span></router-link>
-      <router-link class="tab-item" to="/rating"><span>评论sss</span></router-link>
+      <router-link class="tab-item" to="/rating"><span>评论</span></router-link>
       <router-link class="tab-item" to="/seller"><span>商家</span></router-link>
     </div>
     <router-view></router-view>
