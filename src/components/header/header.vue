@@ -187,7 +187,6 @@
         font-size: 10px;
         line-height: 12px;
         font-weight: 200;
-        vertical-align: top;
       }
     }
   }
