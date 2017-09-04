@@ -185,7 +185,7 @@
       box-sizing: border-box;
       .count {
         font-size: 10px;
-        line-height: 14px;
+        line-height: 12px;
         font-weight: 200;
         vertical-align: top;
       }
