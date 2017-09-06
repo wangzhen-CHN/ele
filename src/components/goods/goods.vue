@@ -1,5 +1,5 @@
 <template>
-<div class="goods">
+<div class="goods" ref="goodsDom">
     <div class="menu-wrapper" ref="menusWrapper">
         <ul>
            <li class="menu-item" v-for="(good, index) in goods" :key="index" :class="{current: index===scrollIndex}" @click="clickMenuItem(index)">
@@ -40,12 +40,14 @@
 <script type="text/javascript">
 import axios from 'axios';
 import Bscroll from 'better-scroll';
+import bus from '../../assets/eventBus';
  export default {
     data(){
          return {
              goods:[],
              footListHeight:[],
-             scrollY:0
+             scrollY:0,
+             headerD:' ssssssssss'
          }
     },
     props: {
@@ -66,12 +68,19 @@ import Bscroll from 'better-scroll';
                 alert('网络错误，不能访问');
             })
     },
+    mounted(){
+    },
     methods:{
         _initScorll(){
-            this.menuScorll=new Bscroll('.menu-wrapper',{click:true});
-            this.footsScorll=new Bscroll('.foots-wrapper',{probeType: 3});
+            this.menuScorll=new Bscroll('.menu-wrapper',{click:true,bounce:false});
+            this.footsScorll=new Bscroll('.foots-wrapper',{probeType: 3,bounce:false});
             this.footsScorll.on('scroll',(pos) => {
-               this.scrollY=Math.abs(pos.y);
+               this.scrollY=Math.abs(pos.y);//获取当前滚动位置
+                if(this.scrollY<=140){
+                    bus.$emit('userBus', this.scrollY);//传值
+                    //console.log(this.$refs.goodsDom)
+                    this.$refs.goodsDom.style.top=(1-this.scrollY/280)*180+'px'; 
+                }
             })
         },
         _footListHeight(){
@@ -81,21 +90,22 @@ import Bscroll from 'better-scroll';
             for(let i=0;i<footList.length;i++){
                 let item=footList[i];
                 height+=item.clientHeight;
-                this.footListHeight.push(height);
+                this.footListHeight.push(height);//计算商品列表对应高度起始值
             }
         },
         clickMenuItem(index){
-            console.log(index);
+            let footIndex = this.$refs.footsWrapper.getElementsByClassName('food-list-hook')[index];
+            this.footsScorll.scrollToElement(footIndex,400);//分类菜单跳转
         }
     },
     computed:{
-        scrollIndex () {
+        scrollIndex () { //计算当前滚动区域
             for (let i = 0; i < this.footListHeight.length; i++) {
                 let scroll1=this.footListHeight[i];
                 let scroll2=this.footListHeight[i+1];
-                console.log("1:::"+this.footListHeight[i])
-                console.log("2:::"+this.footListHeight[i+1])
-                console.log("3:::"+this.scrollY)
+                //console.log("1:::"+this.footListHeight[i])
+                //console.log("2:::"+this.footListHeight[i+1])
+                //console.log("3:::"+this.scrollY)
                 if (!scroll2||(this.scrollY>=scroll1&&this.scrollY<scroll2)) {
                     return i;
                 }

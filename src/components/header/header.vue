@@ -1,7 +1,7 @@
 <template>
-  <div class="header">
-    <div class="content-wrapper">
-      <div class="avatar">
+  <div class="header" ref="headerWrapperDom">
+    <div class="content-wrapper" ref="contentWrapperDom">
+      <div class="avatar" ref="avatarDom">
         <img :src="seller.avatar">
       </div>
       <div class="content">
@@ -9,10 +9,10 @@
           <span class="brand"></span>
           <span class="name">{{seller.name}}</span>
         </div>
-        <div class="description">
+        <div class="description" ref="descriptionDom">
           {{seller.description}}/{{seller.deliveryTime}}分钟到达
         </div>
-        <div class="support" v-if="seller.supports">
+        <div class="support" v-if="seller.supports" ref="supportDom">
           <span class="icon" :class="classMap[seller.supports[0].type]"></span>
           <span class="text">{{seller.supports[0].description}}</span>
         </div>
@@ -22,7 +22,7 @@
         <span class="icon-keyboard_arrow_right"></span>
       </div>
     </div>
-    <div class="bulletin-wrapper" @click="showDetail(true)">
+    <div class="bulletin-wrapper" @click="showDetail(true)" ref="bulletinWrapperDom">
       <span class="bulletin-title"></span>
       <span class="bulletin-text">{{seller.bulletin}}</span>
       <span class="icon-keyboard_arrow_right"></span>
@@ -68,18 +68,41 @@
 </template>
 
 <script>
-  import star from '../star/star.vue'
+  import star from '../star/star.vue';
+  import bus from '../../assets/eventBus';
   export default {
     props: {
           seller: Object
     },
     data () {
       return {
-        detailShow: false,
+        detailShow: false
       }
     },
     created () {
       this.classMap = ["decrease", "discount", "guarantee", "invoice", "special"]
+    },
+    mounted(){
+    
+      var headerWrapperDom = this.$refs.headerWrapperDom;
+      var avatarDom = this.$refs.headerWrapperDom.getElementsByClassName('avatar');
+      var contentWrapperDom = this.$refs.headerWrapperDom.getElementsByClassName('content-wrapper');
+      var bulletinWrapperDom = this.$refs.headerWrapperDom.getElementsByClassName('bulletin-wrapper');
+      var descriptionDom = this.$refs.headerWrapperDom.getElementsByClassName('description');
+      var supportDom = this.$refs.headerWrapperDom.getElementsByClassName('support');
+console.log(contentWrapperDom[0]);
+        bus.$on('userBus', function(scrollY) {
+        
+         avatarDom[0].style.opacity=1-scrollY/130;
+         descriptionDom[0].style.opacity=1-scrollY/130;
+         supportDom[0].style.opacity=1-scrollY/130;
+         contentWrapperDom[0].style.paddingTop=(1-scrollY/300)*24+'px';
+         contentWrapperDom[0].style.marginLeft=(-scrollY/140)*80+'px';
+         bulletinWrapperDom[0].style.opacity=1-scrollY/140;
+         avatarDom[0].style.width=(1-scrollY/800)*64+'px';
+         avatarDom[0].style.height=(1-scrollY/800)*64+'px';
+         headerWrapperDom.style.height=(1-scrollY/200)*140+'px';
+      });       
     },
     methods: {
       showDetail (isShow) {
@@ -187,6 +210,7 @@
         font-size: 10px;
         line-height: 12px;
         font-weight: 200;
+        vertical-align: middle;
       }
     }
   }
