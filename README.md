@@ -10,7 +10,7 @@
 - 使用better-scroll进行联动滑动
 
 ## 在线预览
-[<h2>Dome预览</h2>](http://www.mo36.com/ele/dist/)
+[<h2>Dome预览</h2>](http://www.mo36.com/ele)
 ## Build Setup
 
 ``` bash
